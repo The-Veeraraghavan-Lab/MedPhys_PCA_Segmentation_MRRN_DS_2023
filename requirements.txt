@@ -1,6 +1,10 @@
+beautifulsoup4==4.12.2
+dominate==2.4.0
 h5py==2.10.0
 numpy==1.19.2
-Pillow==9.5.0
+Pillow==10.1.0
 requests==2.24.0
 scipy==1.5.2
-torch==1.4.0
+torch==2.0.0
+torchio==0.19.1
+visdom==0.2.4
