@@ -65,7 +65,7 @@ DIM_in=np.array([128,128,5]) # 128x128 5 Slices
 
 path=os.getcwd()
 model = create_model(opt) 
-model_path = path+'/deep_model/MRRNDS_model' #load weights
+model_path = os.path.join(path,'deep_model','MRRNDS_model') #load weights
 
 model.load_MR_seg_A(model_path) #use weights
 
@@ -77,7 +77,7 @@ for m in model.netSeg_A.modules():
             child.running_mean = None
             child.running_var = None
                 
-path = path+'/nii_vols' #load weights
+path = os.path.join(path,'nii_vols') #load weights
 
 
 for directories in os.listdir(path): 
