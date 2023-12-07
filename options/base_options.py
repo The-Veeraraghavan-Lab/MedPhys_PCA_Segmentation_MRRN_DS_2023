@@ -9,7 +9,7 @@ class BaseOptions():
         self.parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
         self.initialized = False
     def initialize(self):
-        self.parser.add_argument('--dataroot', type=str,default='//lila/data/deasy/Josiah_data/pCR/model_MRRN_dice/maps')#required=True, help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
+        #self.parser.add_argument('--dataroot', type=str,default='//lila/data/deasy/Josiah_data/pCR/model_MRRN_dice/maps')#required=True, help='path to images (should have subfolders trainA, trainB, valA, valB, etc)')
         self.parser.add_argument('--batchSize', type=int, default=1, help='input batch size')
         #self.parser.add_argument('--numModelSamples', type=int, default=30, help='input number of ensemble samples')
         self.parser.add_argument('--mc', type=int, default=0, help='mc dropout for ensemble generation')
@@ -28,14 +28,14 @@ class BaseOptions():
         #self.parser.add_argument('--which_model_netG', type=str, default='resnet_9blocks', help='selects model to use for netG')
         #self.parser.add_argument('--which_model_netSeg', type=str, default='unet_256', help='selects model to use for Seg')        
         #self.parser.add_argument('--n_layers_D', type=int, default=5, help='only used if which_model_netD==n_layers')
-        self.parser.add_argument('--gpu_ids', type=str, default='0', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
+        self.parser.add_argument('--gpu_ids', type=str, default='-1', help='gpu ids: e.g. 0  0,1,2, 0,2. use -1 for CPU')
         self.parser.add_argument('--name', type=str, default='deep_model', help='name of the experiment. It decides where to store samples and models')
         #self.parser.add_argument('--dataset_mode', type=str, default='aligned', help='chooses how datasets are loaded. [unaligned | aligned | single]')
         self.parser.add_argument('--model', type=str, default='MRRN_Segmentor',help='chooses which model to use. cycle_gan, pix2pix, test')
         #self.parser.add_argument('--which_direction', type=str, default='AtoB', help='AtoB or BtoA')
         self.parser.add_argument('--nThreads', default=4, type=int, help='# threads for loading data')
         # self.parser.add_argument('--checkpoints_dir', type=str, default='/lila/data/deasy/data_harini/headneck/checkpoints_unet', help='models are saved here') # './checkpoints_unet'
-        self.parser.add_argument('--checkpoints_dir', type=str, default='//lila/data/deasy/Josiah_data/pCR/src/PCA_Segmentation_Github', help='models are saved here') # './checkpoints_unet'
+        #self.parser.add_argument('--checkpoints_dir', type=str, default='//lila/data/deasy/Josiah_data/pCR/src/PCA_Segmentation_Github', help='models are saved here') # './checkpoints_unet'
         #self.parser.add_argument('--norm', type=str, default='batch', help='instance normalization or batch normalization')
         #self.parser.add_argument('--serial_batches', action='store_true', help='if true, takes images in order to make batches, otherwise takes them randomly')
         #self.parser.add_argument('--display_winsize', type=int, default=256,  help='display window size')
@@ -79,7 +79,7 @@ class BaseOptions():
         print('-------------- End ----------------')
 
         # save to the disk
-        expr_dir = os.path.join(self.opt.checkpoints_dir, self.opt.name)
+        expr_dir = os.path.join(os.getcwd(), self.opt.name)
         util.mkdirs(expr_dir)
         file_name = os.path.join(expr_dir, 'opt.txt')
         with open(file_name, 'wt') as opt_file:
